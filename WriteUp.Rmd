@@ -3,11 +3,22 @@ title: "Your Title"
 author: "Your Name"
 date: 'Last compiled: `r format(Sys.time(), "%b %d, %Y")`'
 output: bookdown::html_document2
+bibliography: [packages.bib]
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA, fig.align = "center")
 ```
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse', 'base'
+), 'packages.bib')
+```
+
+
 
 # Some First Level Header 
 
@@ -25,9 +36,11 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r label = "pressure", echo=FALSE, fig.cap = "You put something here"}
 plot(pressure)
 ```
+
+The plot in Figure \@ref(fig:pressure) was created with base R [@R-base].
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
